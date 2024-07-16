@@ -17,7 +17,7 @@ async def ner(prj: ProjectReq):
     await runClient()
     return prj
 
-@fast_api_app.get("/ner")
-async def nerget():
+@fast_api_app.get("/ner/{project_id}")
+async def nerget(project_id: int):
     result = await runClient()
     return result

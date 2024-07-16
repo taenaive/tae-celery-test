@@ -20,5 +20,5 @@ async def runClient():
                 # print( vars(result))
         res = AsyncResult(result.id,app=app)
         print(f"$${res.state} > {res.get()} > {res.id}")
-        return {"state": res.state}
+        return {"state": res.state, "msg": res.get()}
 # run(runClient())
