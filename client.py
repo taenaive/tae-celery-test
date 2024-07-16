@@ -7,7 +7,7 @@ from asyncio import run, sleep
 from celery.result import AsyncResult
 import sys
 from pathlib import Path
-sys.path.append(str(Path(__file__).parent.parent.parent))
+# sys.path.append(str(Path(__file__).parent.parent.parent))
 from tae_celery_pac.tae_server import TaskQueue, app
 
 async def runClient():
@@ -20,4 +20,5 @@ async def runClient():
                 # print( vars(result))
         res = AsyncResult(result.id,app=app)
         print(f"$${res.state} > {res.get()} > {res.id}")
-run(runClient())
+        return {"state": res.state}
+# run(runClient())
