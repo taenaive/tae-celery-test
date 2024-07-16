@@ -3,8 +3,8 @@ from pydantic import BaseModel
 from client import  runClient
 
 class ProjectReq(BaseModel):
-    projectid: str
-    test: str | None = None
+    projectid: int
+    text: str | None = None
 
 fast_api_app = FastAPI()
 
@@ -12,9 +12,9 @@ fast_api_app = FastAPI()
 async def root():
     return {"msg": "Hola"}
 
-@fast_api_app.post("/ner/")
+@fast_api_app.post("/nerproject")
 async def ner(prj: ProjectReq):
-    await runClient()
+    # await runClient()
     return prj
 
 @fast_api_app.get("/ner/{project_id}")
