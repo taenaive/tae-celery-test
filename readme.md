@@ -1,6 +1,6 @@
-# Celery Test Play
+# Celery FastAPI Test Play
 
-This project shows you how to do celery in python
+This project shows you how to do celery and FastAPI in python
 
 ## Installation
 
@@ -15,29 +15,21 @@ Use the package manager to install redis
 
  ```bash
   python3.11 -m venv .venv
-  pip install celery redis
-  ```
+  source .venv/bin/activate
 
-  ## How to run
-
-  ```bash
-  export PYTHONPATH=$PYTHONPATH:$(pwd)/src
-  celery -A main worker --loglevel=INFO
+  pip install celery redis ...etc
+  #or just
+  pip install -r requirements.txt
+  pip install ../tae-celery-package/dist/tae_celery_pac-0.0.1-py3-none-any.whl --force-reinstall
   ```
 
 ## Run on another terminal to test
 
 ```bash
->>> from main import add
->>> result1 = add(100,100)
->>> result1
-200
->>> result1 = add.delay(100,100)
->>> result1
-<AsyncResult: 421b3df7-6811-48fd-8540-27fef8a2a841>
->>> result1.status
-'PENDING'
->>> 
+#from new terminal
+uvicorn server:fast_api_app --reload
+#and from another terminal
+pytest -v -s
 ```
 ## Celery with Flower (Optional)
 
@@ -49,12 +41,3 @@ celery -A main flower --loglevel=INFO
 celery --broker="redis://localhost:6379" flower --loglevel=INFO
 ```
 *refer to this page [flower docs](https://flower.readthedocs.io/en/latest/install.html#usage)
-
-## distribution
-
-```bash
-pip install build
-# source distribution.
-python -m build -s -v
-#
-```
